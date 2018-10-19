@@ -10,6 +10,7 @@ class Counter extends Component {
   //     this.handleClick = this.handleClick.bind(this);
   //   }
   render() {
+    console.log("Counter Rendered");
     return (
       <div>
         <h3>{this.props.children}</h3>
