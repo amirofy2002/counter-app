@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 class Counter extends Component {
   state = {
-    count: 0,
+    value: this.props.value,
     Address: {
       street: ""
     },
@@ -13,13 +13,9 @@ class Counter extends Component {
     fontSize: 20,
     fontWeight: "bold"
   };
-  handleClick = () => {
-    console.info("increasing counter....", this);
 
-    this.setState({ count: this.state.count + 1 });
-  };
   doHandleClick = cnt => {
-    this.setState({ count: this.state.count + cnt });
+    this.setState({ value: this.state.value + cnt });
   };
   self;
   //   constructor() {
@@ -28,21 +24,30 @@ class Counter extends Component {
   //   }
   render() {
     return (
-      <React.Fragment>
+      <div>
+        <h3>{this.props.children}</h3>
         {/* <img src={this.state.imgUrl} alt="" /> */}
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
         <button
           onClick={() => {
-            this.doHandleClick(3);
+            this.doHandleClick(1);
           }}
           className="btn btn-secondary btn-sm"
         >
-          Increments
+          +
         </button>
-        {this.renderTags()}
-      </React.Fragment>
+        <button
+          onClick={() => {
+            this.doHandleClick(-1);
+          }}
+          className="btn btn-info btn-sm"
+        >
+          -
+        </button>
+        {/* {this.renderTags()} */}
+      </div>
     );
   }
   renderTags() {
@@ -59,13 +64,13 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += this.state.count === 0 ? "warning" : "primary";
+    classes += this.state.value === 0 ? "warning" : "primary";
     return classes;
   }
 
   formatCount() {
-    const { count } = this.state;
-    return this.state.count === 0 ? "Zero" : count;
+    const { value } = this.state;
+    return this.state.value === 0 ? "Zero" : value;
   }
 }
 
